@@ -343,6 +343,19 @@ void directWriteHigh(volatile IO_REG_TYPE *base, IO_REG_TYPE pin)
 #define DIRECT_WRITE_LOW(base, pin)	directWriteLow(base, pin)
 #define DIRECT_WRITE_HIGH(base, pin)	directWriteHigh(base, pin)
 
+#elif defined(K210)
+#define PIN_TO_BASEREG(pin)             (0)
+#define PIN_TO_BITMASK(pin)             (pin)
+#define IO_REG_TYPE unsigned int
+#define IO_REG_BASE_ATTR
+#define IO_REG_MASK_ATTR
+#define DIRECT_READ(base, pin)          digitalRead(pin)
+#define DIRECT_WRITE_LOW(base, pin)     digitalWrite(pin, LOW)
+#define DIRECT_WRITE_HIGH(base, pin)    digitalWrite(pin, HIGH)
+#define DIRECT_MODE_INPUT(base, pin)    pinMode(pin,INPUT)
+#define DIRECT_MODE_OUTPUT(base, pin)   pinMode(pin,OUTPUT)
+
+
 #elif defined(__riscv)
 
 /*
